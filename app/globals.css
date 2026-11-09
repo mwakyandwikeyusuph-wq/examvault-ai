@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #0f172a;
+  --secondary: #2563eb;
+  --accent: #06b6d4;
+  --success: #22c55e;
+  --background: #f8fafc;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: linear-gradient(180deg, #f8fafc 0%, #eef7ff 100%);
+  color: #0f172a;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@layer components {
+  .container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .glass {
+    @apply border border-white/40 bg-white/60 backdrop-blur-xl shadow-glow;
+  }
+
+  .soft-card {
+    @apply rounded-2xl border border-slate-200/80 bg-white/80 p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-xl;
+  }
+
+  .primary-button {
+    @apply inline-flex items-center justify-center rounded-full bg-gradient-to-r from-secondary to-accent px-5 py-3 font-semibold text-white shadow-lg shadow-blue-500/20 transition duration-200 hover:scale-[1.01];
+  }
+
+  .secondary-button {
+    @apply inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 font-semibold text-slate-800 transition duration-200 hover:border-slate-300 hover:bg-slate-50;
+  }
+}
