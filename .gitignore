@@ -1,0 +1,6 @@
+# Local environment: copy to .env.local and fill in your own Supabase project values.
+.env
+.env.local
+.env.*.local
+.next
+node_modules
