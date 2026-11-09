@@ -4,8 +4,8 @@ Phase 1 adds real Supabase Auth integration, a first PostgreSQL migration, prote
 
 ## Configure Supabase
 
-1. Create a Supabase project and copy its Project URL and anon/publishable key.
-2. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and a private `ADMIN_PORTAL_PATH`.
+1. Create a Supabase project and copy its Project URL and publishable key (legacy anon keys are also supported).
+2. Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Set the private `ADMIN_PORTAL_PATH` if desired.
 3. Install dependencies with `npm install` and run `npm run dev`.
 4. Apply the migration using the Supabase CLI:
 
@@ -48,7 +48,7 @@ The Phase 1 migration creates roles, profiles, institutions, subjects, courses, 
 ## Environment variables
 
 - `NEXT_PUBLIC_APP_NAME`, `NEXT_PUBLIC_APP_URL`: public app metadata.
-- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`: required for browser and server auth; safe to expose.
+- `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: required for browser and server auth; public client credentials. `NEXT_PUBLIC_SUPABASE_ANON_KEY` remains a supported legacy alias.
 - `SUPABASE_SERVICE_ROLE_KEY`: optional privileged server-only key. Never send it to the browser or commit its value.
 - `ADMIN_PORTAL_PATH`: non-indexed, hard-to-guess entry path. This is not a substitute for authentication/RBAC.
 - Integration keys are optional until their feature phase is implemented.

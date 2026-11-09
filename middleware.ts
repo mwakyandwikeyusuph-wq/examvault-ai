@@ -19,13 +19,11 @@ export async function middleware(request: NextRequest) {
   const isInternalAdmin = isWithin(pathname, internalAdminPath);
   const needsAuth = protectedPaths.some((path) => isWithin(pathname, path));
 
-  // Never expose the implementation route directly. Requests to the configured path
-  // are internally rewritten only after the user and role have been verified.
   if (isInternalAdmin && !isAdminEntry) return notFound(request);
   if (!isAdminEntry && !needsAuth) return NextResponse.next();
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !key) return isAdminEntry ? notFound(request) : NextResponse.redirect(new URL('/login', request.url));
 
   let response = NextResponse.next({ request });
@@ -40,7 +38,6 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  // getUser() verifies the access token with Supabase Auth; do not trust getSession() here.
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     return isAdminEntry ? notFound(request) : NextResponse.redirect(new URL('/login', request.url));
